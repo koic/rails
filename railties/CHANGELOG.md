@@ -1,3 +1,13 @@
+## Backport from Rails 5.0.0 (Not yet backporting to master branch)
+
+*   Add `config/initializers/to_time_preserves_timezone.rb`, which tells
+    Active Support to preserve the receiver's timezone when calling `to_time`.
+    This matches the new behavior that will be part of Ruby 2.4.
+
+    Fixes #24617.
+
+    *Andrew White*
+
 ## Rails 4.2.7 (July 12, 2016) ##
 
 *   Do not run `bundle install` when generating a new plugin.

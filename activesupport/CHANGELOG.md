@@ -1,3 +1,25 @@
+## Backport from Rails 5.0.0 (Not yet backporting to master branch)
+
+*   Add `ActiveSupport.to_time_preserves_timezone` config option to control
+    how `to_time` handles timezones. In Ruby 2.4+ the behavior will change
+    from converting to the local system timezone to preserving the timezone
+    of the receiver. This config option defaults to false so that apps made
+    with earlier versions of Rails are not affected when upgrading, e.g:
+
+        >> ENV['TZ'] = 'US/Eastern'
+
+        >> "2016-04-23T10:23:12.000Z".to_time
+        => "2016-04-23T06:23:12.000-04:00"
+
+        >> ActiveSupport.to_time_preserves_timezone = true
+
+        >> "2016-04-23T10:23:12.000Z".to_time
+        => "2016-04-23T10:23:12.000Z"
+
+    Fixes #24617.
+
+    *Andrew White*
+
 ## Rails 4.2.7 (July 12, 2016) ##
 
 *   Fixed `ActiveSupport::Logger.broadcast` so that calls to `#silence` now

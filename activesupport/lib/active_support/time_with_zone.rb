@@ -1,5 +1,6 @@
 require 'active_support/values/time_zone'
 require 'active_support/core_ext/object/acts_like'
+require 'active_support/core_ext/date_and_time/compatibility'
 
 module ActiveSupport
   # A Time-like class that can represent a time in any time zone. Necessary
@@ -40,7 +41,7 @@ module ActiveSupport
       'Time'
     end
 
-    include Comparable
+    include Comparable, DateAndTime::Compatibility
     attr_reader :time_zone
 
     def initialize(utc_time, time_zone, local_time = nil, period = nil)
@@ -316,11 +317,10 @@ module ActiveSupport
       utc.to_r
     end
 
-    # Return an instance of Time in the system timezone.
-    def to_time
-      utc.to_time
-    end
-
+    # Returns an instance of DateTime with the timezone's UTC offset
+    #
+    #   Time.zone.now.to_datetime                         # => Tue, 18 Aug 2015 02:32:20 +0000
+    #   Time.current.in_time_zone('Hawaii').to_datetime   # => Mon, 17 Aug 2015 16:32:20 -1000
     def to_datetime
       utc.to_datetime.new_offset(Rational(utc_offset, 86_400))
     end
