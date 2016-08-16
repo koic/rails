@@ -38,6 +38,9 @@ group :doc do
   gem 'mustache', '~> 0.99.8'
 end
 
+# AR
+gem 'arel', git: 'https://github.com/rails/arel.git', branch: '6-0-stable'
+
 # AS
 gem 'dalli', '>= 2.2.1'
 
