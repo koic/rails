@@ -108,7 +108,7 @@ GEM
       thor (~> 0.19.1)
       useragent (~> 0.16.7)
     blade-qunit_adapter (1.20.0)
-    builder (3.2.2)
+    builder (3.2.3)
     bunny (2.2.2)
       amq-protocol (>= 2.0.1)
     byebug (9.0.5)
